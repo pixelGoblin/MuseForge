@@ -8,8 +8,6 @@ const defineCategory = (displayName, order, tags, formula) => ({
   formula
 })
 
-
-
 export const useTagsStore = defineStore('tags', {
   state: () => ({
     availableTypes: [
@@ -18,6 +16,7 @@ export const useTagsStore = defineStore('tags', {
       { title: 'Props', value: 'prop' }
     ],
     selectedType: 'character',
+    inspirationCards: [],
 
     environmentTags: {
       location: defineCategory(
@@ -324,10 +323,16 @@ export const useTagsStore = defineStore('tags', {
         .sort(([, a], [, b]) => a.order - b.order)
         .map(([key, config]) => ({ key, ...config }))
     }),
-  
-  //   currentTypeTitle: (state) => {
-  //     return state.availableTypes.find(t => t.value === state.selectedType)?.title || ''
-  //   }
-  // },
   },
+  actions: {
+    addInspirationCard(card) {
+      this.inspirationCards.unshift(card);
+    },
+    removeInspirationCard(card) {
+      this.inspirationCards = this.inspirationCards.filter(c => c !== card);
+    },
+    clearInspirationCards() {
+      this.inspirationCards = [];
+    }
+  }
 });
