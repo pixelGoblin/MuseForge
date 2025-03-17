@@ -16,68 +16,41 @@
 
   const loading = ref(false);
 
-  
-
-  // const formatCategoryName = (category) => {
-  //   return category.replace(/(^\w|_\w)/g, (match) => 
-  //     match.replace(/_/, ' ').toUpperCase()
-  //   );
-  // };
 
   const allSelected = computed(() => {
-    return selectedCategories.value.length === 5;
+    return selectedCategories.value.length === selectedType.value.length;
   });
 
   const generateInspiration = () => {
-    if (selectedCategories.value.length === 0) {
-      alert('Please select at least one category');
-      return;
-    }
     const vowels = ['a', 'e', 'i', 'o', 'u'];
     const resultGenerated = {
       sentence: '',
+      type: '',
       tags: [],
       isLiked: false
     };
     // const currentType = tagsStore.selectedType;
     // const categories  = tagsStore.orderedCategories[currentType];
-    const selectedKeys = selectedCategories.value
-
+    const selectedKeys = selectedCategories.value;
     const orderedKeys = selectedKeys.sort((a, b) => { a.order - b.order });
 
     const parts = orderedKeys.map(key => {
       const randomTag = key.tags[Math.floor(Math.random() * key.tags.length)]
       const result = key.formula(randomTag);
       resultGenerated.tags.push({
-        category: key.displayName,
+        categoryDisplayName: key.displayName,
+        category: key.key,
         tag: randomTag
       });
       return result;
     });
+    console.log(parts);
 
     const sentence = `${vowels.includes(parts[0][0].toLowerCase()) ? 'An' : 'A'} ${parts.join(' ')}.`;
-
+    resultGenerated.type = tagsStore.selectedType;
     resultGenerated.sentence = sentence;
 
     tagsStore.addInspirationCard(resultGenerated);
-
-    // const generated = {};
-    // for (const category of selectedCategories.value) {
-    //   const availableTags = currentTags[category];
-    //   if (availableTags && availableTags.length > 0) {
-    //     const randomIndex = Math.floor(Math.random() * availableTags.length);
-    //     generated[category] = availableTags[randomIndex];
-    //   }
-    // }
-    // const sentenceParts = selectedCategories.value.map(category => generated[category]);
-    // const fullSentence = sentenceParts.join(' ');
-    // console.log(fullSentence);
-
-    // tagsStore.addInspirationCard({
-    //   sentence: fullSentence,
-    //   categories: selectedCategories.value,
-    //   tags: generated
-    // });
   };
 </script>
 

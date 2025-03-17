@@ -18,6 +18,11 @@ export const useTagsStore = defineStore('tags', {
     selectedType: 'character',
     inspirationCards: [],
     favoritedInspirationCards: [],
+    isEditing: false,
+    editingCard: {
+      card: {},
+      id: null
+    },
 
     environmentTags: {
       location: defineCategory(
@@ -330,7 +335,9 @@ export const useTagsStore = defineStore('tags', {
       this.inspirationCards.unshift(card);
     },
     editInspirationCard(card, id) {
-      
+      this.isEditing = true;
+      this.editingCard.card = card;
+      this.editingCard.id = id;
     },
     removeInspirationCard(id) {
       this.inspirationCards.splice(id, 1);
@@ -346,6 +353,21 @@ export const useTagsStore = defineStore('tags', {
       }
         
       // console.log(this.favoritedInspirationCards);
+    },
+    rerollTag(type, tag) {
+      const typeTags = this[`${type}Tags`];
+      const tagsCategory = typeTags[tag.category].tags;
+      const randomTag = tagsCategory[Math.floor(Math.random() * tagsCategory.length)];
+      tag.tag = randomTag;
+      this.updateSentence();
+      return randomTag;
+    },
+    updateSentence() {
+      const vowels = ['a', 'e', 'i', 'o', 'u'];
+      const parts = this.editingCard.card.tags.map(tag => tag.tag);
+      const sentence = `${vowels.includes(parts[0][0].toLowerCase()) ? 'An' : 'A'} ${parts.join(' ')}.`;
+      this.editingCard.card.sentence = sentence;
+      
     }
   }
 });
