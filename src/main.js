@@ -24,7 +24,7 @@ const vuetify = createVuetify({
       ...aliases,
       heart: mdiHeart,
       edit: mdiPencil,
-      delete: mdiDelete
+      remove: mdiDelete
     },
     sets: {
       mdi,

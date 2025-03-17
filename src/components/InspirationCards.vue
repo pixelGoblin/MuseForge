@@ -35,7 +35,7 @@
             />
             <v-btn
               class="pa-1 ma-1"
-              icon="$delete"
+              icon="$remove"
               size="x-large"
               @click="tagsStore.removeInspirationCard(id);"
             />
