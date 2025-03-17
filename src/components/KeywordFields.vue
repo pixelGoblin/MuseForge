@@ -16,6 +16,8 @@
 
   const loading = ref(false);
 
+  
+
   // const formatCategoryName = (category) => {
   //   return category.replace(/(^\w|_\w)/g, (match) => 
   //     match.replace(/_/, ' ').toUpperCase()
@@ -32,6 +34,10 @@
       return;
     }
     const vowels = ['a', 'e', 'i', 'o', 'u'];
+    const resultGenerated = {
+      sentence: '',
+      tags: []
+    };
     // const currentType = tagsStore.selectedType;
     // const categories  = tagsStore.orderedCategories[currentType];
     const selectedKeys = selectedCategories.value
@@ -41,9 +47,18 @@
     const parts = orderedKeys.map(key => {
       const randomTag = key.tags[Math.floor(Math.random() * key.tags.length)]
       const result = key.formula(randomTag);
+      resultGenerated.tags.push({
+        category: key.displayName,
+        tag: randomTag
+      });
       return result;
-    })
-    console.log(`${vowels.includes(parts[0][0].toLowerCase()) ? 'An' : 'A'} ${parts.join(' ')}.`);
+    });
+
+    const sentence = `${vowels.includes(parts[0][0].toLowerCase()) ? 'An' : 'A'} ${parts.join(' ')}.`;
+
+    resultGenerated.sentence = sentence;
+
+    tagsStore.addInspirationCard(resultGenerated);
 
     // const generated = {};
     // for (const category of selectedCategories.value) {
@@ -91,7 +106,7 @@
     </v-menu>
   </div>
 
-  <v-container class="ma-0 px-0 py-6">
+  <v-container class="ma-0 px-0 pt-6 pb-0">
     <v-row align="center" justify="start">
       <v-col
         v-for="(selection, i) in selectedCategories"
@@ -109,28 +124,10 @@
         </v-chip>
       </v-col>
     </v-row>
-    <!-- Environment Categories -->
-    <v-container v-if="selectedType === 'environment'"  class="mx-auto px-0">
-      <v-card-title>Environment Tags</v-card-title>
-      <v-card-text>
-        <template v-for="category in environmentCategories">
-          <v-chip
-            v-if="!selectedCategories.includes(category)"
-            :key="category"
-            class="ma-1 rounded-xl pa-4"
-            :filter="selectedCategories.includes(category)"
-            @click="selectedCategories.push(category)"
-            label
-          >
-            {{ category.displayName }}
-          </v-chip>
-        </template>
-      </v-card-text>
-    </v-container>
 
     <!-- Character Categories -->
     <v-container v-if="selectedType === 'character'" class="mx-auto px-0">
-      <v-card-title>Character Tags</v-card-title>
+      <!-- <v-card-title>Character Tags</v-card-title> -->
       <v-card-text>
         <template v-for="category in characterCategories">
           <v-chip
@@ -147,9 +144,28 @@
       </v-card-text>
     </v-container>
 
+    <!-- Environment Categories -->
+    <v-container v-if="selectedType === 'environment'"  class="mx-auto px-0">
+      <!-- <v-card-title >Environment Tags</v-card-title> -->
+      <v-card-text>
+        <template v-for="category in environmentCategories">
+          <v-chip
+            v-if="!selectedCategories.includes(category)"
+            :key="category"
+            class="ma-1 rounded-xl pa-4"
+            :filter="selectedCategories.includes(category)"
+            @click="selectedCategories.push(category)"
+            label
+          >
+            {{ category.displayName }}
+          </v-chip>
+        </template>
+      </v-card-text>
+    </v-container>
+
     <!-- Prop Categories -->
     <v-container v-if="selectedType === 'prop'" class="mx-auto px-0">
-      <v-card-title>Prop Tags</v-card-title>
+      <!-- <v-card-title>Prop Tags</v-card-title> -->
       <v-card-text>
         <template v-for="category in propCategories">
           <v-chip
@@ -173,11 +189,12 @@
   </v-container>
   <v-btn 
     color="primary"
+    class="generate-button rounded-lg px-4 py-2 mb-5 w-100"
     :disabled="selectedCategories.length === 0"
     @click="generateInspiration"
   >
     Generate
-    <v-icon end>mdi-auto-fix</v-icon>
+    <!-- <v-icon end>mdi-auto-fix</v-icon> -->
   </v-btn>
 </template>
 
@@ -220,6 +237,15 @@
 
 .type-display:hover .underline {
   opacity: 1;
+}
+
+button.v-btn {
+  /* margin: 1rem 2rem; */
+  font-size: 1.1em;
+  /* padding: 1rem 2rem; */
+  /* width: 100%; */
+  border-radius: 4px;
+  height: 3rem;
 }
 
 /* Menu styling */
