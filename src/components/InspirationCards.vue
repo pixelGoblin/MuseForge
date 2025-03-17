@@ -66,12 +66,13 @@
   }
 
   .v-card-actions {
-    /* opacity: 0; */
-    transition: opacity 0.3s ease-in;
+    opacity: 0;
+    transition: opacity  0.3s ease-in, background-color 0.1s ease-in;
   }
 
   .v-card-actions:hover {
     opacity: 1;
+    background-color: var(--color-background-mute);
   }
 
   .heart-icon.liked {
