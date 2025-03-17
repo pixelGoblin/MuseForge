@@ -11,7 +11,7 @@ import Sidebar from './components/Sidebar.vue'
     </span>
     
   </header>
-
+  <v-divider></v-divider>
   <main>
     <div class="main-content">
       <KeywordFields />

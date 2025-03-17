@@ -31,18 +31,19 @@
       alert('Please select at least one category');
       return;
     }
-    const currentType = tagsStore.selectedType;
-    const categories  = tagsStore.orderedCategories[currentType];
+    const vowels = ['a', 'e', 'i', 'o', 'u'];
+    // const currentType = tagsStore.selectedType;
+    // const categories  = tagsStore.orderedCategories[currentType];
     const selectedKeys = selectedCategories.value
 
     const orderedKeys = selectedKeys.sort((a, b) => { a.order - b.order });
 
     const parts = orderedKeys.map(key => {
       const randomTag = key.tags[Math.floor(Math.random() * key.tags.length)]
-      return `${randomTag} (${key.displayName})`
+      const result = key.formula(randomTag);
+      return result;
     })
-
-    console.log(parts.join(' '));
+    console.log(`${vowels.includes(parts[0][0].toLowerCase()) ? 'An' : 'A'} ${parts.join(' ')}.`);
 
     // const generated = {};
     // for (const category of selectedCategories.value) {
@@ -150,7 +151,7 @@
     <v-container v-if="selectedType === 'prop'" class="mx-auto px-0">
       <v-card-title>Prop Tags</v-card-title>
       <v-card-text>
-        <template v-for="category in characterCategories">
+        <template v-for="category in propCategories">
           <v-chip
             v-if="!selectedCategories.includes(category)"
             :key="category"
@@ -209,10 +210,10 @@
 
 .underline {
   position: absolute;
-  bottom: -2px;
+  bottom: 5px;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 2px;
   background: currentColor;
   opacity: 0.6;
 }
