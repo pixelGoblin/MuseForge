@@ -17,6 +17,7 @@ export const useTagsStore = defineStore('tags', {
     ],
     selectedType: 'character',
     inspirationCards: [],
+    favoritedInspirationCards: [],
 
     environmentTags: {
       location: defineCategory(
@@ -328,11 +329,23 @@ export const useTagsStore = defineStore('tags', {
     addInspirationCard(card) {
       this.inspirationCards.unshift(card);
     },
-    removeInspirationCard(card) {
-      this.inspirationCards = this.inspirationCards.filter(c => c !== card);
+    editInspirationCard(card, id) {
+      
+    },
+    removeInspirationCard(id) {
+      this.inspirationCards.splice(id, 1);
     },
     clearInspirationCards() {
       this.inspirationCards = [];
+    },
+    toggleLike(card, id) {
+      if (!card.isLiked && !this.favoritedInspirationCards.includes(card)) {
+        this.inspirationCards[id].isLiked = true;
+      } else {
+        this.inspirationCards[id].isLiked = false;
+      }
+        
+      // console.log(this.favoritedInspirationCards);
     }
   }
 });

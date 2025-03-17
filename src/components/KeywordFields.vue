@@ -36,7 +36,8 @@
     const vowels = ['a', 'e', 'i', 'o', 'u'];
     const resultGenerated = {
       sentence: '',
-      tags: []
+      tags: [],
+      isLiked: false
     };
     // const currentType = tagsStore.selectedType;
     // const categories  = tagsStore.orderedCategories[currentType];
@@ -49,7 +50,8 @@
       const result = key.formula(randomTag);
       resultGenerated.tags.push({
         category: key.displayName,
-        tag: randomTag
+        tag: randomTag,
+        isLiked: false
       });
       return result;
     });
