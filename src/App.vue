@@ -33,4 +33,13 @@ import Sidebar from './components/Sidebar.vue'
     align-items: center;
     padding: 0 1rem;
   }
+
+  main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "main-content sidebar";
+    height: calc(100vh - 3rem);
+    width: 100%;
+  }
 </style>
