@@ -50,8 +50,7 @@
       const result = key.formula(randomTag);
       resultGenerated.tags.push({
         category: key.displayName,
-        tag: randomTag,
-        isLiked: false
+        tag: randomTag
       });
       return result;
     });
