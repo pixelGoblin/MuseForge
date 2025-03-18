@@ -92,7 +92,7 @@
       <v-col
         v-for="(selection, i) in selectedCategories"
         :key="selection"
-        class="py-1 pe-0"
+        class="selected-chips-area py-1 pe-0"
         cols="auto"
       >
         <v-chip
@@ -107,7 +107,7 @@
     </v-row>
 
     <!-- Character Categories -->
-    <v-container v-if="selectedType === 'character'" class="mx-auto px-0">
+    <v-container v-if="selectedType === 'character'" class="tags-container mx-0 px-0 w-100">
       <!-- <v-card-title>Character Tags</v-card-title> -->
       <v-card-text>
         <template v-for="category in characterCategories">
@@ -126,7 +126,7 @@
     </v-container>
 
     <!-- Environment Categories -->
-    <v-container v-if="selectedType === 'environment'"  class="mx-auto px-0">
+    <v-container v-if="selectedType === 'environment'"  class="tags-container mx-0 px-0 w-100">
       <!-- <v-card-title >Environment Tags</v-card-title> -->
       <v-card-text>
         <template v-for="category in environmentCategories">
@@ -145,7 +145,7 @@
     </v-container>
 
     <!-- Prop Categories -->
-    <v-container v-if="selectedType === 'prop'" class="mx-auto px-0">
+    <v-container v-if="selectedType === 'prop'" class="tags-container mx-0 px-0 w-100">
       <!-- <v-card-title>Prop Tags</v-card-title> -->
       <v-card-text>
         <template v-for="category in propCategories">
@@ -194,6 +194,13 @@
   margin: 0;
 } */
 
+.tags-container {
+  max-width: 100%;
+}
+
+.selected-chips-area {
+  min-height: 3rem;
+}
 
 .type-selector {
   font-size: 1.8rem;
