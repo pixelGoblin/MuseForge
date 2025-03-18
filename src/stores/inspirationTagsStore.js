@@ -25,19 +25,6 @@ export const useTagsStore = defineStore('tags', {
     },
 
     environmentTags: {
-      location: defineCategory(
-        'Location', 
-        2, 
-        [
-          'Jungle', 'Island', 'City', 'Desert', 'Arctic', 'Ocean', 'Forest', 'Mountain', 'Cave', 'Swamp',
-          'Village', 'Metropolis', 'Ruins', 'Space Station', 'Underwater City', 'Farmland', 'Canyon', 'Volcano', 'Graveyard', 'Castle',
-          'Jungle', 'Space Station', 'Desert Oasis', 'Underground Bunker', 'Floating Market',
-          'Abandoned Factory', 'Mountain Peak', 'Cyberpunk Alley', 'Medieval Village', 'Tropical Beach',
-          'Haunted Mansion', 'Futuristic Farm', 'Ancient Library', 'Crystal Cave', 'War Zone',
-          'Frozen Lake', 'Nomad Camp', 'Vertical Slums', 'Radioactive Crater', 'Sky Port'
-        ], 
-        function (randomTag) { return `${randomTag}`}
-      ),
       emotion: defineCategory(
         'Emotion',
         1,
@@ -51,6 +38,19 @@ export const useTagsStore = defineStore('tags', {
         ], 
         function (randomTag) { return `${randomTag}`}
       ),
+      location: defineCategory(
+        'Location', 
+        2, 
+        [
+          'Jungle', 'Island', 'City', 'Desert', 'Arctic', 'Ocean', 'Forest', 'Mountain', 'Cave', 'Swamp',
+          'Village', 'Metropolis', 'Ruins', 'Space Station', 'Underwater City', 'Farmland', 'Canyon', 'Volcano', 'Graveyard', 'Castle',
+          'Jungle', 'Space Station', 'Desert Oasis', 'Underground Bunker', 'Floating Market',
+          'Abandoned Factory', 'Mountain Peak', 'Cyberpunk Alley', 'Medieval Village', 'Tropical Beach',
+          'Haunted Mansion', 'Futuristic Farm', 'Ancient Library', 'Crystal Cave', 'War Zone',
+          'Frozen Lake', 'Nomad Camp', 'Vertical Slums', 'Radioactive Crater', 'Sky Port'
+        ], 
+        function (randomTag) { return `${randomTag}`}
+      ),
       ambience: defineCategory(
         'Ambience', 
         3, 
@@ -59,15 +59,6 @@ export const useTagsStore = defineStore('tags', {
           'Lively', 'Quiet', 'Busy', 'Mystical', 'Ethereal', 'Claustrophobic', 'Expansive', 'Cozy', 'Alien', 'Dreamlike',
         ], 
         function (randomTag) { return `with ${randomTag.toLowerCase()} atmosphere`}
-      ),
-      scale: defineCategory(
-        'Scale', 
-        6, 
-        [
-          'Human', 'Planet', 'Galactic', 'Microscopic', 'Room-Sized', 'City-Sized', 'Continent-Sized', 'Solar System', 'Universe', 'Pocket Dimension',
-          'Infinite', 'Tiny', 'Massive', 'Intimate', 'Monumental', 'Vast', 'Compact', 'Overwhelming', 'Minimal', 'Grand',
-        ], 
-        function (randomTag) { return `on a ${randomTag.toLowerCase()} scale`}
       ),
       timePeriod: defineCategory(
         'Time Period', 
@@ -84,6 +75,15 @@ export const useTagsStore = defineStore('tags', {
         [
           'Morning', 'Noon', 'Dusk', 'Night', 'Twilight', 'Dawn', 'Midnight'
         ], function (randomTag) { return `${randomTag === 'Morning' ? 'in the': 'at'} ${randomTag.toLowerCase()}`}
+      ),
+      scale: defineCategory(
+        'Scale', 
+        6, 
+        [
+          'Human', 'Planet', 'Galactic', 'Microscopic', 'Room-Sized', 'City-Sized', 'Continent-Sized', 'Solar System', 'Universe', 'Pocket Dimension',
+          'Infinite', 'Tiny', 'Massive', 'Intimate', 'Monumental', 'Vast', 'Compact', 'Overwhelming', 'Minimal', 'Grand',
+        ], 
+        function (randomTag) { return `on a ${randomTag.toLowerCase()} scale`}
       ),
       climate: defineCategory(
         'Climate', 
@@ -147,30 +147,12 @@ export const useTagsStore = defineStore('tags', {
     },
 
     characterTags: {
-      race: defineCategory(
-        'Race/Species', 
-        61, 
-        [
-          'Human', 'Demon', 'Alien', 'Elf', 'Dwarf', 'Orc', 'Robot', 'Vampire', 'Werewolf', 'Angel',
-          'Ghost', 'Goblin', 'Troll', 'Fairy', 'Dragon', 'Cyborg', 'Mermaid', 'Zombie', 'Shapeshifter', 'Giant', 'Humanoid'
-        ], 
-        function (randomTag) { return `${randomTag}`}
-      ),
       bodyType: defineCategory(
         'Body Type', 
         1,
         [
           'Slim', 'Muscular', 'Fat', 'Tall', 'Short', 'Lanky', 'Stocky',
           'Ethereal', 'Mechanical', 'Animalistic', 'Monstrous', 'Elegant', 'Bulky', 'Fragile', 'Agile', 'Powerful', 'Delicate',
-        ], 
-        function (randomTag) { return `${randomTag}`}
-      ),
-      occupation: defineCategory(
-        'Occupation', 
-        63, 
-        [
-          'Prisoner', 'Android', 'Priest', 'Knight', 'Scientist', 'Artist', 'Merchant', 'Farmer', 'Soldier', 'Thief',
-          'Wizard', 'Engineer', 'Doctor', 'Pilot', 'Detective', 'Explorer', 'Chef', 'Musician', 'Blacksmith', 'Scholar',
         ], 
         function (randomTag) { return `${randomTag}`}
       ),
@@ -189,27 +171,6 @@ export const useTagsStore = defineStore('tags', {
         [
           'Injured', 'Healthy', 'Tired', 'Energized', 'Happy', 'Sad', 'Angry', 'Confused', 'Determined', 'Scared',
           'Calm', 'Nervous', 'Excited', 'Bored', 'Focused', 'Distracted', 'Hopeful', 'Despairing', 'Lonely', 'Content',
-        ], 
-        function (randomTag) { return `${randomTag}`}
-      ),
-      action: defineCategory(
-        'Action', 
-        99, 
-        [
-          'Walking', 'Running', 'Fighting', 'Meditating', 'Dancing', 'Singing', 'Reading', 'Writing', 'Crafting', 'Exploring',
-          'Flying', 'Swimming', 'Climbing', 'Sleeping', 'Eating', 'Laughing', 'Crying', 'Thinking', 'Observing', 'Creating',
-        ], 
-        function (randomTag) { return `${randomTag}`}
-      ),
-      role: defineCategory(
-        'Role', 
-        62, 
-        [
-          'Hero', 'Villain', 'Antihero', 'Sidekick', 'Mentor', 'Rogue', 'Soldier', 'King', 'Queen', 'Nomad', 
-          'Outcast', 'Inventor', 'Mercenary', 'Scholar', 'Scavenger',
-          'Diplomat', 'Pilgrim', 'Engineer', 'Spy', 'Survivor',
-          'Guardian', 'Smuggler', 'Healer', 'Prophet', 'Entertainer',
-          'Rebel', 'Aristocrat', 'Drifter', 'Artisan', 'Experiment'
         ], 
         function (randomTag) { return `${randomTag}`}
       ),
@@ -238,6 +199,45 @@ export const useTagsStore = defineStore('tags', {
           'Regal', 'Ragged', 'Armored', 'Luminous', 'Masked',
           'Bionic', 'Veiled', 'Tattooed', 'Pierced', 'Distinctive',
           'Fashionable', 'Practical', 'Ceremonial', 'Improvised', 'Uniformed'
+        ], 
+        function (randomTag) { return `${randomTag}`}
+      ),
+      race: defineCategory(
+        'Race/Species', 
+        61, 
+        [
+          'Human', 'Demon', 'Alien', 'Elf', 'Dwarf', 'Orc', 'Robot', 'Vampire', 'Werewolf', 'Angel',
+          'Ghost', 'Goblin', 'Troll', 'Fairy', 'Dragon', 'Cyborg', 'Mermaid', 'Zombie', 'Shapeshifter', 'Giant', 'Humanoid'
+        ], 
+        function (randomTag) { return `${randomTag}`}
+      ),
+      role: defineCategory(
+        'Role', 
+        62, 
+        [
+          'Hero', 'Villain', 'Antihero', 'Sidekick', 'Mentor', 'Rogue', 'Soldier', 'King', 'Queen', 'Nomad', 
+          'Outcast', 'Inventor', 'Mercenary', 'Scholar', 'Scavenger',
+          'Diplomat', 'Pilgrim', 'Engineer', 'Spy', 'Survivor',
+          'Guardian', 'Smuggler', 'Healer', 'Prophet', 'Entertainer',
+          'Rebel', 'Aristocrat', 'Drifter', 'Artisan', 'Experiment'
+        ], 
+        function (randomTag) { return `${randomTag}`}
+      ),
+      occupation: defineCategory(
+        'Occupation', 
+        63, 
+        [
+          'Prisoner', 'Android', 'Priest', 'Knight', 'Scientist', 'Artist', 'Merchant', 'Farmer', 'Soldier', 'Thief',
+          'Wizard', 'Engineer', 'Doctor', 'Pilot', 'Detective', 'Explorer', 'Chef', 'Musician', 'Blacksmith', 'Scholar',
+        ], 
+        function (randomTag) { return `${randomTag}`}
+      ),
+      action: defineCategory(
+        'Action', 
+        99, 
+        [
+          'Walking', 'Running', 'Fighting', 'Meditating', 'Dancing', 'Singing', 'Reading', 'Writing', 'Crafting', 'Exploring',
+          'Flying', 'Swimming', 'Climbing', 'Sleeping', 'Eating', 'Laughing', 'Crying', 'Thinking', 'Observing', 'Creating',
         ], 
         function (randomTag) { return `${randomTag}`}
       ),
@@ -351,21 +351,28 @@ export const useTagsStore = defineStore('tags', {
       } else {
         this.inspirationCards[id].isLiked = false;
       }
-        
-      // console.log(this.favoritedInspirationCards);
     },
     rerollTag(type, tag) {
       const typeTags = this[`${type}Tags`];
       const tagsCategory = typeTags[tag.category].tags;
-      const randomTag = tagsCategory[Math.floor(Math.random() * tagsCategory.length)];
-      tag.tag = randomTag;
+
+      let newTag;
+      do {
+        newTag = tagsCategory[Math.floor(Math.random() * tagsCategory.length)];
+      } while (newTag === tag.tag && tagsCategory.length > 1);
+      tag.tag = newTag;
       this.updateSentence();
-      return randomTag;
     },
     updateSentence() {
       const vowels = ['a', 'e', 'i', 'o', 'u'];
-      const parts = this.editingCard.card.tags.map(tag => tag.tag);
-      const sentence = `${vowels.includes(parts[0][0].toLowerCase()) ? 'An' : 'A'} ${parts.join(' ')}.`;
+      const type = this.editingCard.card.type;
+      const typeTags = this[`${type}Tags`];
+      const parts = this.editingCard.card.tags.map(tag => {
+        const category = typeTags[tag.category];
+        return category.formula(tag.tag);
+      });
+
+      const sentence = `${vowels.includes(parts[0]?.charAt(0).toLowerCase()) ? 'An' : 'A'} ${parts.join(' ')}.`;
       this.editingCard.card.sentence = sentence;
       
     }
