@@ -166,11 +166,12 @@
   <v-btn 
     color="primary"
     class="generate-button rounded-lg px-4 py-2 mb-5 w-100"
+    
     :disabled="selectedCategories.length === 0"
     @click="generateInspiration"
   >
     Generate
-    <!-- <v-icon end>mdi-auto-fix</v-icon> -->
+    <v-icon icon="$generate" end />
   </v-btn>
 </template>
 
