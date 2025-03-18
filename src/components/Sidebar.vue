@@ -1,7 +1,6 @@
 <script setup>
-  import { ref, computed } from 'vue';
+  import { computed } from 'vue';
 
-  import { storeToRefs } from 'pinia';
   import { useTagsStore } from '../stores/inspirationTagsStore';
 
   const tagsStore = useTagsStore();
@@ -21,27 +20,25 @@
       <span class="title">Edit Ideas</span>
 
     </header>
-    <div class="editing-container" v-if="tagsStore.isEditing">
-      
-      
-      <!-- {{ tagsStore.editingCard.card }} -->
-      <template
-        v-for="tag in editingCard.card.tags"
-      >
-        
+    <div v-if="tagsStore.isEditing" class="editing-container">
+      <v-card v-if="editingCard.card.tags" class="ma-2">
+        <v-card-text id="editing-card-sentence">
+          {{ editingCard.card.sentence }}
+        </v-card-text>
+      </v-card>
+      <div class="tag-buttons">
         <v-btn
-          class="ma-1"
+          v-for="(tag, idx) in editingCard.card.tags"
+          :key="idx"
+          class="ma-1 pa-2"
           color="primary"
+          prepend-icon="$dice"
           @click="rerollTag(editingCard.card.type, tag)"
         >
-          {{ tag.tag }}
+        {{ tag.categoryDisplayName }}: {{ tag.tag }}
         </v-btn>
-      </template>
-      <!-- <v-btn
-        @click="console.log(editingCard.card.tags.map(tag => tag.tag));"
-      >
-        log
-      </v-btn> -->
+        
+      </div>
     </div>
   </div>
 </template>
@@ -55,5 +52,20 @@
     padding: 0.5rem 2rem;
     background-color: var(--color-background-soft);
     font-size: 1.3rem;
+  }
+
+  .editing-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #editing-card-sentence {
+    font-size: 1.2rem;
+  }
+
+  .tag-buttons {
+    display: flex;
+    flex-direction: column;
   }
 </style>
