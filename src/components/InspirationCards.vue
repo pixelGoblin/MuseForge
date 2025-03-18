@@ -15,7 +15,12 @@
         v-for="(card, id) in inspirationCards"
         :key="id"
       >
-        <v-card class="inspiration-card" >
+        <v-card class="inspiration-card pl-5" >
+          <div
+            v-if="card.isLiked"
+            class="liked-indicator"
+          ></div>
+
           {{ card.sentence }}
           <v-card-actions
             class="position-absolute bottom-0 right-0 my-auto h-100"
@@ -77,6 +82,17 @@
   }
 
   .heart-icon.liked {
-    color: #F44336;
+    color: var(--vt-c-liked-light);
   }
+
+  .liked-indicator {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  height: 100%;
+  width: 10px;
+  background-color: var(--vt-c-liked-dark); 
+  /* border-radius: 2px 0 0 2px; */
+  transition: transform 0.2s ease;
+}
 </style>
