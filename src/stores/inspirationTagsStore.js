@@ -345,16 +345,32 @@ export const useTagsStore = defineStore('tags', {
     },
     removeInspirationCard(id) {
       this.inspirationCards.splice(id, 1);
+      this.updateFavoritedCards();
     },
     clearInspirationCards() {
       this.inspirationCards = this.inspirationCards.filter(card => card.isLiked);
     },
-    toggleLike(card, id) {
-      if (!card.isLiked && !this.favoritedInspirationCards.includes(card)) {
-        this.inspirationCards[id].isLiked = true;
-      } else {
-        this.inspirationCards[id].isLiked = false;
+    updateFavoritedCards() {
+      this.favoritedInspirationCards = this.inspirationCards.filter(card => card.isLiked);
+      this.saveCardsToLocalStorage();
+    },
+    saveCardsToLocalStorage() {
+      localStorage.setItem('inspirationCards', JSON.stringify(this.favoritedInspirationCards));
+    },
+    loadCardsFromLocalStorage() {
+      const savedCards = localStorage.getItem('inspirationCards');
+      if (savedCards) {
+        try {
+          this.inspirationCards = JSON.parse(savedCards);
+          this.updateFavoritedCards();
+        } catch (e) {
+          console.error('Error loading cards from localStorage:', e);
+        }
       }
+    },
+    toggleLike(id) {
+      this.inspirationCards[id].isLiked = !this.inspirationCards[id].isLiked;
+      this.updateFavoritedCards();
     },
     rerollTag(type, tag) {
       const typeTags = this[`${type}Tags`];

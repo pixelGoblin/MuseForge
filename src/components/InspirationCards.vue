@@ -1,11 +1,15 @@
 <script setup>
-  import { ref, computed } from 'vue';
+  import { onMounted  } from 'vue';
 
   import { storeToRefs } from 'pinia';
   import { useTagsStore } from '../stores/inspirationTagsStore';
 
   const tagsStore = useTagsStore();
   const { inspirationCards } = storeToRefs(tagsStore);
+
+  onMounted(() => {
+    tagsStore.loadCardsFromLocalStorage();
+  })
 </script>
 
 <template>
@@ -30,7 +34,7 @@
               icon="$heart"
               size="x-large"
               :class="{ 'liked': card.isLiked }"
-              @click="tagsStore.toggleLike(card, id);"
+              @click="tagsStore.toggleLike(id);"
             />
             <v-btn
               class="pa-1 ma-1"
