@@ -31,8 +31,7 @@
       isLiked: false
     };
 
-    const orderedSelectedKeys = selectedCategories.value.sort((a, b) => { a.order - b.order });
-
+    const orderedSelectedKeys = selectedCategories.value.sort((a, b) => { return a.order - b.order });
     const parts = orderedSelectedKeys.map(category => {
       const randomTag = category.tags[Math.floor(Math.random() * category.tags.length)]
       const formatted = category.formula(randomTag);
