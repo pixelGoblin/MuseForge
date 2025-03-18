@@ -181,7 +181,7 @@
       :disabled="inspirationCards.length === 0"
       @click="clearAllIdeas"
     >
-
+      <v-icon icon="$deleteAll" size="x-large"/>
     </v-btn>
   </div>
   

@@ -7,7 +7,7 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
-import { mdiHeart, mdiPencil, mdiDelete, mdiDiceMultiple, mdiAutoFix } from '@mdi/js'
+import { mdiHeart, mdiPencil, mdiDelete, mdiDiceMultiple, mdiAutoFix, mdiDeleteAlert } from '@mdi/js'
 // import '@mdi/font/css/materialdesignicons.css'
 
 import { createPinia } from 'pinia'
@@ -26,7 +26,8 @@ const vuetify = createVuetify({
       edit: mdiPencil,
       remove: mdiDelete,
       dice: mdiDiceMultiple,
-      generate: mdiAutoFix
+      generate: mdiAutoFix,
+      deleteAll: mdiDeleteAlert
     },
     sets: {
       mdi,
