@@ -335,6 +335,10 @@ export const useTagsStore = defineStore('tags', {
       this.inspirationCards.unshift(card);
     },
     editInspirationCard(card, id) {
+      if (this.isEditing && this.editingCard.id === id) {
+        this.isEditing = false;
+        return;
+      }
       this.isEditing = true;
       this.editingCard.card = card;
       this.editingCard.id = id;
