@@ -35,11 +35,10 @@ a {
   }
 }
 
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
 
   #app {
     display: grid;
     grid-template-rows: 1fr 10fr;
-    /* padding: 0 2rem; */
   }
-}
+} */

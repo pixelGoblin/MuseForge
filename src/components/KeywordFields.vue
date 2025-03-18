@@ -9,6 +9,7 @@
   const currentTypeTitle = computed(() => tagsStore.availableTypes.find(t => t.value === tagsStore.selectedType)?.title || '');
   const availableTypes = computed(() => tagsStore.availableTypes);
   const { selectedType } = storeToRefs(tagsStore);
+  const { inspirationCards } = storeToRefs(tagsStore);
 
   const environmentCategories = tagsStore.orderedCategories.environment;
   const characterCategories = tagsStore.orderedCategories.character;
@@ -54,6 +55,10 @@
 
     tagsStore.addInspirationCard(resultGenerated);
   };
+
+  const clearAllIdeas = () => {
+    console.log('clearing');
+  }
 </script>
 
 <template>
@@ -82,7 +87,7 @@
     </v-menu>
   </div>
 
-  <v-container class="ma-0 px-0 pt-6 pb-0">
+  <div class="ma-0 px-0 pt-6 pb-0 w-100">
     <v-row align="center" justify="start">
       <v-col
         v-for="(selection, i) in selectedCategories"
@@ -158,21 +163,28 @@
         
       </v-card-text>
     </v-container>
+  </div>
 
-    <!-- <v-divider v-if="!allSelected"></v-divider> -->
+  <div class="pa-0 ma-0 d-flex ga-2 w-100">
+    <v-btn 
+      color="primary"
+      class="generate-button rounded-lg px-4 py-2 mb-5 w-90 flex-1-1"
+      :disabled="selectedCategories.length === 0"
+      @click="generateInspiration"
+    >
+      Generate
+      <v-icon icon="$generate" end />
+    </v-btn>
+    <v-btn
+      color="primary"
+      class="generate-button rounded-lg px-4 py-2 mb-5 w-10"
+      :disabled="inspirationCards.length === 0"
+      @click="clearAllIdeas"
+    >
 
-    
-  </v-container>
-  <v-btn 
-    color="primary"
-    class="generate-button rounded-lg px-4 py-2 mb-5 w-100"
-    
-    :disabled="selectedCategories.length === 0"
-    @click="generateInspiration"
-  >
-    Generate
-    <v-icon icon="$generate" end />
-  </v-btn>
+    </v-btn>
+  </div>
+  
 </template>
 
 <style scoped>
