@@ -72,7 +72,8 @@
 
   .v-card-actions:hover {
     opacity: 1;
-    background-color: var(--color-background-mute);
+    /* background-color: var(--color-background-mute); */
+    background-color: #2196F3;
   }
 
   .heart-icon.liked {
