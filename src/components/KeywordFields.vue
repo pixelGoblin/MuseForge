@@ -18,35 +18,37 @@
 
 
   const allSelected = computed(() => {
-    return selectedCategories.value.length === selectedType.value.length;
+    const typeTags = tagsStore[`${tagsStore.selectedType}Tags`];
+    return selectedCategories.value.length === typeTags.length;
   });
 
   const generateInspiration = () => {
-    const vowels = ['a', 'e', 'i', 'o', 'u'];
     const resultGenerated = {
       sentence: '',
       type: '',
       tags: [],
       isLiked: false
     };
-    // const currentType = tagsStore.selectedType;
-    // const categories  = tagsStore.orderedCategories[currentType];
-    const selectedKeys = selectedCategories.value;
-    const orderedKeys = selectedKeys.sort((a, b) => { a.order - b.order });
 
-    const parts = orderedKeys.map(key => {
-      const randomTag = key.tags[Math.floor(Math.random() * key.tags.length)]
-      const result = key.formula(randomTag);
+    const orderedSelectedKeys = selectedCategories.value.sort((a, b) => { a.order - b.order });
+
+    const parts = orderedSelectedKeys.map(category => {
+      const randomTag = category.tags[Math.floor(Math.random() * category.tags.length)]
+      const formatted = category.formula(randomTag);
+
       resultGenerated.tags.push({
-        categoryDisplayName: key.displayName,
-        category: key.key,
+        categoryDisplayName: category.displayName,
+        category: category.key,
         tag: randomTag
       });
-      return result;
-    });
-    console.log(parts);
 
-    const sentence = `${vowels.includes(parts[0][0].toLowerCase()) ? 'An' : 'A'} ${parts.join(' ')}.`;
+      return formatted;
+    });
+
+    resultGenerated.parts = parts;
+    
+    const vowels = ['a', 'e', 'i', 'o', 'u'];
+    const sentence = `${vowels.includes(parts[0]?.charAt(0).toLowerCase()) ? 'An' : 'A'} ${parts.join(' ')}.`;
     resultGenerated.type = tagsStore.selectedType;
     resultGenerated.sentence = sentence;
 
