@@ -1,15 +1,33 @@
 ﻿name: Deploy
 on:
+  pull_request:
+    types: [closed]
+    branches: [main]
   push:
     branches: [main]
+
 jobs:
   deploy:
+    if: |
+      github.event_name == 'push' || 
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - run: npm install && npm run build
-      - uses: peaceiris/actions-gh-pages@v3
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.merged == true && github.event.pull_request.base.ref || github.ref }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
