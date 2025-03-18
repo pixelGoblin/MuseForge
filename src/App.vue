@@ -2,7 +2,11 @@
   import KeywordFields from './components/KeywordFields.vue'
   import InspirationCards from './components/InspirationCards.vue'
   import Sidebar from './components/Sidebar.vue'
+  import ThemeToggle from '@/components/ThemeToggle.vue'
   import { useTagsStore } from './stores/inspirationTagsStore';
+  // onMounted(() => {
+  //   themeStore.initializeTheme()
+  // })
   const tagsStore = useTagsStore();
 </script>
 
@@ -11,7 +15,7 @@
     <span class="title">
       MuseForge — Generate project ideas
     </span>
-    
+    <ThemeToggle />
   </header>
   <v-divider></v-divider>
   <main :class="{ 'editing': tagsStore.isEditing }">
@@ -31,7 +35,7 @@
     width: 100%;
     text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 0 1rem;
   }
