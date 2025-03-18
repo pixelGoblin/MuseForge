@@ -4,9 +4,6 @@
   import Sidebar from './components/Sidebar.vue'
   import ThemeToggle from '@/components/ThemeToggle.vue'
   import { useTagsStore } from './stores/inspirationTagsStore';
-  // onMounted(() => {
-  //   themeStore.initializeTheme()
-  // })
   const tagsStore = useTagsStore();
 </script>
 
