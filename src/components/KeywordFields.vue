@@ -57,7 +57,7 @@
   };
 
   const clearAllIdeas = () => {
-    console.log('clearing');
+    tagsStore.clearInspirationCards();
   }
 </script>
 

@@ -347,7 +347,7 @@ export const useTagsStore = defineStore('tags', {
       this.inspirationCards.splice(id, 1);
     },
     clearInspirationCards() {
-      this.inspirationCards = [];
+      this.inspirationCards = this.inspirationCards.filter(card => card.isLiked);
     },
     toggleLike(card, id) {
       if (!card.isLiked && !this.favoritedInspirationCards.includes(card)) {
