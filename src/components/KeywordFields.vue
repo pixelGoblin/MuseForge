@@ -18,10 +18,10 @@
   const loading = ref(false);
 
 
-  const allSelected = computed(() => {
-    const typeTags = tagsStore[`${tagsStore.selectedType}Tags`];
-    return selectedCategories.value.length === typeTags.length;
-  });
+  // const allSelected = computed(() => {
+  //   const typeTags = tagsStore[`${tagsStore.selectedType}Tags`];
+  //   return selectedCategories.value.length === typeTags.length;
+  // });
 
   const generateInspiration = () => {
     const resultGenerated = {
